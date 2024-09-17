@@ -1,0 +1,1 @@
+import{q as o,a as r}from"./app-6fa01f51.js";import{I as s}from"./image-5db51842.js";function c({className:m,...p}){const{web_setting:a}=o().props;return r(s,{src:`/storage/images/${a==null?void 0:a.website_logo_dark}`,className:"max-w-[180px] mr-2"})}export{c as L};
