@@ -39,7 +39,7 @@ export function CommandPalette({ open, setOpen }) {
     const debouncedSearch = useCallback(
         debounce(async (value) => {
             const { data } = await axios.get(
-                route('packages.search', {
+                route('article.search', {
                     search: value,
                 }),
             );
@@ -74,49 +74,20 @@ export function CommandPalette({ open, setOpen }) {
                         ))
                     ) : (
                         <div className="px-4 py-2 text-center text-sm text-gray-500">
-                            Tidak ada hasil
+                            Pencarian Posts
                         </div>
                     )}
-                    {auth.user && results.length === 0 && (
-                        <>
-                            <CommandItem className={cmdic} onSelect={() => router.get(route('dashboard'))}>
-                                <IconDashboard />
-                                Dashboard
-                            </CommandItem>
-                            <CommandItem className={cmdic} onSelect={() => router.get(route('profile.index'))}>
-                                <IconPerson />
-                                Profile
-                            </CommandItem>
-                            <CommandItem className={cmdic} onSelect={() => router.get(route('packages.index'))}>
-                                <IconNotes />
-                                List Packages
-                            </CommandItem>
-                            <CommandItem className={cmdic} onSelect={() => router.post(route('logout'))}>
-                                <IconLogout />
-                                Log out
-                            </CommandItem>
-                        </>
-                    )}
-                    {!auth.user && results.length === 0 && (
+                 
                         <>
                             <CommandItem className={cmdic} onSelect={() => router.get(route('home'))}>
                                 <IconHome />
                                 Home
                             </CommandItem>
-                            <CommandItem className={cmdic} onSelect={() => router.get(route('packages.index'))}>
+                            <CommandItem className={cmdic} onSelect={() => router.get(route('articles.index'))}>
                                 <IconNotes />
-                                Packages
-                            </CommandItem>
-                            <CommandItem className={cmdic} onSelect={() => router.get(route('login'))}>
-                                <IconLogin />
-                                Login
-                            </CommandItem>
-                            <CommandItem className={cmdic} onSelect={() => router.get(route('register'))}>
-                                <IconCirclePerson />
-                                Register
+                                Articles
                             </CommandItem>
                         </>
-                    )}
                 </CommandList>
             </CommandDialog>
         </>

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title inertia>{{ config('app.name', 'Binbaz Travel') }}</title>
+    <title inertia>{{ config('app.name', 'SGDscn Unida') }}</title>
 
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
@@ -23,9 +23,6 @@
     @viteReactRefresh
     @vite(['resources/js/app.jsx', "resources/js/pages/{$page['component']}.jsx"])
     @inertiaHead
-    <!-- Add this to your main layout or HTML file -->
-    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
-        data-client-key="{{ env('MIDTRANS_CLIENTKEY') }}"></script>
 
 </head>
 

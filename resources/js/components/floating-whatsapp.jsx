@@ -39,10 +39,10 @@ export default function FloatWhatsapp() {
             accountName={web_setting.website_name}
             allowEsc
             chatMessage="Ada yang bisa kami bantu?"
-            avatar={`/storage/images/${web_setting?.website_logo}`}
+            avatar={`https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/640px-WhatsApp.svg.png`}
             allowClickAway
             darkMode={isDarkMode}
-            statusMessage='kami akan melayani anda via whatsapp'
+            statusMessage='Contact via Whatsapp'
             placeholder='ketik pesan disini..'
             notification
             notificationSound

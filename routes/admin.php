@@ -17,8 +17,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     // with middleware auth:admin
     Route::middleware('admin')->group(function () {
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-
-
         
         Route::get('videos', [App\Http\Controllers\Admin\VideoController::class, 'index'])->name('videos.index');
         Route::get('videos/create', [App\Http\Controllers\Admin\VideoController::class, 'create'])->name('videos.create');
@@ -27,10 +25,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::put('videos/{video}', [App\Http\Controllers\Admin\VideoController::class, 'update'])->name('videos.update');
         Route::delete('videos/{video}', [App\Http\Controllers\Admin\VideoController::class, 'destroy'])->name('videos.destroy');
 
-
-    
         Route::resource('articles', App\Http\Controllers\Admin\ArticleController::class)->names('articles');
-        Route::resource('categories', CategoryController::class)->names('categories');
         Route::resource('users', UserController::class)->names('users');
         Route::resource('sliders', App\Http\Controllers\Admin\SliderController::class)->names('sliders');
         Route::resource('partners', App\Http\Controllers\Admin\PartnerController::class)->names('partners');

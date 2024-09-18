@@ -16,10 +16,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             SettingsTableSeeder::class,
             AdminSeeder::class,
-            HotelTableSeeder::class,
             MenuSeeder::class,
             PartnerSeeder::class,
-            TestimonialSeeder::class,
         ]);
     }
 }
