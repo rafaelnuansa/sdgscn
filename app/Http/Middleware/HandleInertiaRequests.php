@@ -56,8 +56,6 @@ class HandleInertiaRequests extends Middleware
             'menus_categories' => $menus_categories ?? null,
             'web_menus' => $web_menus ?? null,
             'web_setting' => $web_setting ?? null,
-            'midtransIsProduction' => config('services.midtrans.isProduction'),
-            'midtransClientKey' => config('services.midtrans.clientKey'),
             'flash_message' => fn () => [
                 'type' => $request->session()->get('type'),
                 'title' => $request->session()->get('title'),

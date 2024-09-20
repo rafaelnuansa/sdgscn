@@ -34,17 +34,13 @@ class LoginController extends Controller
             // Set session untuk menandakan bahwa pengguna telah login
             $request->session()->regenerate();
             // Redirect ke halaman yang sesuai setelah login berhasil
-            return redirect()->back();
+            return redirect('admin/dashboard');
         } else {
             // Redirect kembali ke halaman login dengan pesan kesalahan
             return redirect()->back()->with('error', 'Login Gagal mohon cek akun anda!');
         }
     }
 
-    public function showLoginForm()
-    {
-        return view('admin.auth.login');
-    }
 
     public function logout()
     {

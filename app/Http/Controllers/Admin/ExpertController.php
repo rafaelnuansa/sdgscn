@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Expert;
 use Illuminate\Http\Request;
 
 class ExpertController extends Controller
@@ -28,6 +29,8 @@ class ExpertController extends Controller
             $request->validate([
                 'image' => 'required|image|mimes:jpeg,jpg,png,webp|max:2048',
                 'name' => 'required|string|max:255',
+                'description' => 'string',
+                'link' => 'string',
             ]);
     
             $image = $request->file('image');
@@ -37,9 +40,10 @@ class ExpertController extends Controller
             Expert::create([
                 'image' => $image->hashName(),
                 'name' => $request->name,
+                'description' => $request->description,
             ]);
     
-            flashMessage('success', 'Expert created successfully.');
+            flashMessage('Success', 'Expert created successfully.');
             return redirect()->route('admin.experts.index');
         } catch (QueryException $e) {
             // Jika terjadi kesalahan pada query database
@@ -63,6 +67,8 @@ class ExpertController extends Controller
     {
         $request->validate([
             'image'         => 'nullable|image|mimes:jpeg,jpg,png,webp|max:2048',
+            'description' => 'nullable',
+            'link'          => 'nullable',
             'name'         => 'nullable|min:3',
         ]);
 
@@ -77,15 +83,19 @@ class ExpertController extends Controller
             $expert->update([
                 'image'         => $image->hashName(),
                 'name'         => $request->name,
+                'description'         => $request->description,
+                'link'         => $request->link,
             ]);
 
         } else {
             //update expert without image
             $expert->update([
                 'name'         => $request->name,
+                'description'  => $request->description,
+                'link'         => $request->link,
             ]);
         }
-        flashMessage('success', 'Expert updated successfully.');
+        flashMessage('Success', 'Expert updated successfully.');
         return redirect()->route('admin.experts.index');
     }
 
@@ -93,7 +103,7 @@ class ExpertController extends Controller
     {
         $expert->delete();
         Storage::delete('public/experts/'.$expert->image);
-        flashMessage('success', 'Expert deleted successfully.');
+        flashMessage('Success', 'Expert deleted successfully.');
         return redirect()->route('admin.experts.index');
     }
 }

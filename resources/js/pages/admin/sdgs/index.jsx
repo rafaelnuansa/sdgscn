@@ -7,20 +7,20 @@ import Swal from 'sweetalert2';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { useFilter } from '@/hooks/useFilter';
 import { IconCirclePlus } from '@irsyadadl/paranoid';
-import ExpertTable from './table';
+import SdgTable from './table';
 
-export default function ExpertsIndex({ auth, ...props }) {
+export default function SdgsIndex({ auth, ...props }) {
 
-    const { experts } = usePage().props;
-    // const { data: experts, meta, links } = props.experts;
+    const { sdgs } = usePage().props;
+    // const { data: sdgs, meta, links } = props.sdgs;
     const { delete: handleDelete } = useForm();
 
 
     const [params, setParams] = useState(props.state);
     useFilter({
-        route: route('admin.experts.index'),
+        route: route('admin.sdgs.index'),
         values: params,
-        only: ['experts'],
+        only: ['sdgs'],
     });
     const handleUserDelete = (slug) => {
         Swal.fire({
@@ -33,27 +33,27 @@ export default function ExpertsIndex({ auth, ...props }) {
             confirmButtonText: 'Yes, delete it!',
         }).then((result) => {
             if (result.isConfirmed) {
-                handleDelete(route('admin.experts.destroy', slug));
+                handleDelete(route('admin.sdgs.destroy', slug));
             }
         });
     };
 
     return (
         <>
-            <Head title="Experts" />
+            <Head title="Sdgs" />
             <Container>
                 <Card>
                     <CardContent className="p-0 [&_td]:whitespace-nowrap [&_td]:px-6 [&_th]:px-6 [&_thead]:border-t">
                         <div className="flex flex-col justify-between gap-y-6 p-6 md:flex-row md:items-center md:gap-y-0">
                             <CardHeader className="p-0">
-                                <CardTitle>Experts</CardTitle>
-                                <CardDescription>Manage Experts</CardDescription>
+                                <CardTitle>Sdgs</CardTitle>
+                                <CardDescription>Manage Sdgs</CardDescription>
                             </CardHeader>
                             <div className="flex max-w-md flex-col gap-2 md:flex-row">
                                 <div className="grid grid-cols-2 gap-x-2 md:flex">
                               
                                     <Button asChild>
-                                        <Link href={route('admin.experts.create')}>
+                                        <Link href={route('admin.sdgs.create')}>
                                             <IconCirclePlus className="mr-2 size-4" />
                                             New
                                         </Link>
@@ -61,7 +61,7 @@ export default function ExpertsIndex({ auth, ...props }) {
                                 </div>
                             </div>
                         </div>
-                        <ExpertTable experts={experts} handleUserDelete={handleUserDelete} />
+                        <SdgTable sdgs={sdgs.data} handleUserDelete={handleUserDelete} />
 
                     </CardContent>
                  
@@ -71,4 +71,4 @@ export default function ExpertsIndex({ auth, ...props }) {
     );
 }
 
-ExpertsIndex.layout = (page) => <AdminLayout children={page} />;
+SdgsIndex.layout = (page) => <AdminLayout children={page} />;

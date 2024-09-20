@@ -30,32 +30,4 @@ class GalleryController extends Controller
             ]
         );
     }
-
-    public function videos(Request $request)
-    {
-        $videos = VideoResource::collection(
-            $self = Video::query()
-                ->latest()
-                ->paginate(10)
-                ->withQueryString()
-        )->additional([
-            'meta' => [
-                'has_pages' => $self->hasPages(),
-            ],
-        ]);
-
-        return inertia('gallery/video/index', [
-            'videos' => fn () => $videos,
-            'state' => $request->only('page'),
-        ]);
-    }
-
-    public function videoShow($slug)
-    {
-        $video = Video::where('slug', $slug)->firstOrFail();
-        return inertia('gallery/video/show', 
-        [
-            'video' => $video,
-        ]);
-    }
 }

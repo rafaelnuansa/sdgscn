@@ -45,6 +45,32 @@ export default function Hero({ slides }) {
         );
     }
 
+    if (slides.length === 1) {
+        // Jika hanya ada 1 slide, tidak menggunakan slider
+        const slide = slides[0];
+        return (
+            <div className="relative overflow-hidden h-[500px]">
+                <img
+                    src={`/storage/sliders/${slide.image}`}
+                    alt={slide.title || "Slide"}
+                    className="absolute inset-0 w-full h-full object-cover"
+                />
+                {(slide.title || slide.description || slide.url) && (
+                    <div className="absolute bottom-4 left-4 text-white z-20 bg-black/50 p-4 rounded-lg max-w-md">
+                        {slide.title && <h2 className="text-2xl font-bold">{slide.title}</h2>}
+                        {slide.description && <p className="mt-2">{slide.description}</p>}
+                        {slide.url && (
+                            <Link href={slide.url} className={buttonVariants({ variant: 'primary', className: 'mt-4' })}>
+                                Read More
+                            </Link>
+                        )}
+                    </div>
+                )}
+            </div>
+        );
+    }
+
+    // Jika lebih dari 1 slide, gunakan slider
     return (
         <div className="relative overflow-hidden">
             <Slider {...settings}>

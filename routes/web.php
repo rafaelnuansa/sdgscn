@@ -14,6 +14,9 @@ Route::get('pages/{slug}', [App\Http\Controllers\PageController::class, 'show'])
 Route::get('articles', [App\Http\Controllers\ArticleController::class, 'index'])->name('articles.index');
 Route::get('articles/{slug}', [App\Http\Controllers\ArticleController::class, 'show'])->name('articles.show');
 
+Route::get('sdgs', [App\Http\Controllers\SdgController::class, 'index'])->name('sdgs.index');
+Route::get('sdgs/{slug}', [App\Http\Controllers\SdgController::class, 'show'])->name('sdgs.show');
+
 Route::get('videos', [App\Http\Controllers\GalleryController::class, 'videos'])->name('galleries.videos.index');
 Route::get('videos/{slug}', [App\Http\Controllers\GalleryController::class, 'videoShow'])->name('galleries.videos.show');
 

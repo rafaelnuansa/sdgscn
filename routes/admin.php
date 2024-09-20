@@ -1,35 +1,26 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\Auth\LoginController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\HotelController;
-use App\Http\Controllers\Admin\UserController;
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     // Menampilkan form login
-    Route::get('login', [LoginController::class, 'showLoginForm'])->name('login.index');
+    Route::get('login', [App\Http\Controllers\Admin\LoginController::class, 'showLoginForm'])->name('login.index');
     // Proses otentikasi login
-    Route::post('login', [LoginController::class, 'authenticate'])->name('authenticate');
+    Route::post('login', [App\Http\Controllers\Admin\LoginController::class, 'authenticate'])->name('authenticate');
     // Proses logout
-    Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+    Route::post('logout', [App\Http\Controllers\Admin\LoginController::class, 'logout'])->name('logout');
     // with middleware auth:admin
     Route::middleware('admin')->group(function () {
-        Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+        Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard.index');
         
-        Route::get('videos', [App\Http\Controllers\Admin\VideoController::class, 'index'])->name('videos.index');
-        Route::get('videos/create', [App\Http\Controllers\Admin\VideoController::class, 'create'])->name('videos.create');
-        Route::post('videos', [App\Http\Controllers\Admin\VideoController::class, 'store'])->name('videos.store');
-        Route::get('videos/{video}/edit', [App\Http\Controllers\Admin\VideoController::class, 'edit'])->name('videos.edit');
-        Route::put('videos/{video}', [App\Http\Controllers\Admin\VideoController::class, 'update'])->name('videos.update');
-        Route::delete('videos/{video}', [App\Http\Controllers\Admin\VideoController::class, 'destroy'])->name('videos.destroy');
-
         Route::resource('articles', App\Http\Controllers\Admin\ArticleController::class)->names('articles');
-        Route::resource('users', UserController::class)->names('users');
+        Route::resource('users', App\Http\Controllers\Admin\UserController::class)->names('users');
         Route::resource('sliders', App\Http\Controllers\Admin\SliderController::class)->names('sliders');
         Route::resource('partners', App\Http\Controllers\Admin\PartnerController::class)->names('partners');
-       
+        Route::resource('sdgs', App\Http\Controllers\Admin\SdgController::class)->names('sdgs');
+        Route::resource('experts', App\Http\Controllers\Admin\ExpertController::class)->names('experts');
+
+
         Route::put('pages/{page}/restore', [App\Http\Controllers\Admin\PageController::class, 'restore'])->name('pages.restore');
         Route::delete('pages/{page}/force', [App\Http\Controllers\Admin\PageController::class, 'force'])->name('pages.force');
        
@@ -39,12 +30,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::delete('albums/gallery/{gallery}', [App\Http\Controllers\Admin\AlbumController::class, 'deleteImage'])->name('albums.gallery.destroy');
         
         Route::resource('galleries', App\Http\Controllers\Admin\AlbumController::class)->names('galleries');
+        Route::resource('research', App\Http\Controllers\Admin\ResearchController::class)->names('research');
 
         Route::get('settings', [App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
         Route::put('settings', [App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
-        Route::get('settings/home/content', [App\Http\Controllers\Admin\HomeContentController::class, 'index'])->name('home_contents.index');
-        Route::post('settings/home/content', [App\Http\Controllers\Admin\HomeContentController::class, 'update'])->name('home_contents.update');
-
+   
         Route::get('menus', [App\Http\Controllers\Admin\MenuController::class, 'index'])->name('menus.index');
         Route::post('menus', [App\Http\Controllers\Admin\MenuController::class, 'store'])->name('menus.store');
         Route::put('menus/{id}', [App\Http\Controllers\Admin\MenuController::class, 'update'])->name('menus.update');

@@ -16,6 +16,5 @@ export default defineConfig({
     },
     optimizeDeps: {
         exclude: ['radix-ui/react-accordion'],
-        exclude: ['editorjs/pharagraph']
       }
 });
