@@ -57,34 +57,45 @@ class PublicationController extends Controller
             'experts' => Expert::orderBy('name')->get(), // Fetch experts
         ]);
     }
-
     public function store(Request $request)
     {
-        // Validate the request data
-        $request->validate([
-            'sdg_id' => 'required|exists:sdgs,id',
-            'title' => 'required|string|max:255',
-            'year' => 'nullable|string|max:4',
-            'link' => 'nullable|string',
-            'experts' => 'nullable|array',
-            'experts.*' => 'exists:experts,id', // Validate expert IDs
-        ]);
+        try {
+            // Validate the request data
+            $request->validate([
+                'sdg_id' => 'required|exists:sdgs,id',
+                'title' => 'required|string|max:255',
+                'year' => 'nullable|string|max:4',
+                'link' => 'nullable|string',
+                'selected_experts' => 'required|array',
+                'selected_experts.*' => 'exists:experts,id', // Validate expert IDs
+            ]);
 
-        // Create a new publication
-        $publication = SdgPublication::create([
-            'sdg_id' => $request->sdg_id,
-            'title' => $request->title,
-            'year' => $request->year,
-            'link' => $request->link,
-        ]);
+            // Create a new publication
+            $publication = SdgPublication::create([
+                'sdg_id' => $request->sdg_id,
+                'title' => $request->title,
+                'year' => $request->year,
+                'link' => $request->link,
+            ]);
 
-        // Attach experts to the publication (you may need to adjust this line based on your pivot table structure)
-        $publication->experts()->attach($request->experts, ['id' => Str::uuid()]); // Ensure to set the ID here if it's required
+            // Attach experts to the publication
+            foreach ($request->selected_experts as $expertId) {
+                $publication->experts()->attach($expertId, ['id' => Str::uuid()]); // Generate a unique ID for each expert
+            }
 
-        flashMessage('Success', 'Publication created successfully.');
-        return redirect()->route('admin.publications.index');
+            // Flash success message
+            flashMessage('Success', 'Publication created successfully.');
+            return redirect()->route('admin.publications.index');
+        } catch (\Exception $e) {
+            // Log the error message
+
+            // Flash an error message
+            flashMessage('Error', $e->getMessage());
+
+            // Redirect back to the form with input and error messages
+            return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while creating the publication.']);
+        }
     }
-
     public function edit(SdgPublication $publication)
     {
         // Get the specific publication for editing

@@ -1,0 +1,1 @@
+import{j as s,F as o,a}from"./app-63e7952b.js";import{F as e}from"./logo-8dbfaedc.js";import{N as t,F as i}from"./footer-35468446.js";function c({children:r}){return s(o,{children:[s("div",{className:"min-h-screen",children:[a(t,{}),a(e,{}),r]}),a(i,{})]})}export{c as A};

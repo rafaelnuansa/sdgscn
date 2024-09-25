@@ -1,0 +1,1 @@
+import{r as t,y as p}from"./app-63e7952b.js";import{l as o}from"./lodash-e77bcb61.js";function n({route:s,values:r,only:a}){const e=t.useCallback(o.debounce(c=>{p.get(s,o.pickBy(c),{only:a,preserveState:!0,preserveScroll:!0})},500),[]);return t.useEffect(()=>e(r),[r,e]),{values:r}}export{n as u};

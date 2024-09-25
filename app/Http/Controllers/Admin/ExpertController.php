@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Expert;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ExpertController extends Controller
 {
@@ -38,7 +39,7 @@ class ExpertController extends Controller
                 'image' => 'required|image|mimes:jpeg,jpg,png,webp|max:2048',
                 'name' => 'required|string|max:255',
                 'description' => 'string',
-                'link' => 'string',
+                'link' => 'required|url',
             ]);
 
             $image = $request->file('image');
@@ -49,6 +50,7 @@ class ExpertController extends Controller
                 'image' => $image->hashName(),
                 'name' => $request->name,
                 'description' => $request->description,
+                'link' => $request->link,
             ]);
 
             flashMessage('Success', 'Expert created successfully.');

@@ -1,1 +1,0 @@
-import{a as s}from"./app-0f317af6.js";import{c as a}from"./utils-ad603c53.js";function o({className:t,message:r,...e}){return s("p",{...e,className:a("mt-1 text-sm text-destructive first-letter:uppercase",t),children:r})}export{o as I};
