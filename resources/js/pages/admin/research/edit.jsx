@@ -7,19 +7,25 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { InputErrorMessage } from '@/components/input-error-message';
+import { MultiSelect } from '@/components/multi-select'; // Import the MultiSelect component
 
-export default function ResearchEdit({ research, sdgs }) {
+export default function ResearchEdit({ research, sdgs, experts }) {
     const { data, setData, post, errors, processing } = useForm({
         sdg_id: research.sdg_id ?? '',
         title: research.title ?? '',
         year: research.year ?? '',
-        author: research.author ?? '',
         link: research.link ?? '',
+        experts: research.experts.map(expert => expert.id) ?? [], // Ensure we get the selected experts' IDs
         _method: 'PUT',
     });
+    console.log(data.experts)
 
     const onChange = (e) => {
         setData(e.target.name, e.target.value);
+    };
+
+    const handleExpertsChange = (selectedExperts) => {
+        setData('experts', selectedExperts); // Update the experts in form data
     };
 
     const handleSubmit = (e) => {
@@ -67,14 +73,22 @@ export default function ResearchEdit({ research, sdgs }) {
                                 <InputErrorMessage message={errors.year} />
                             </div>
                             <div className="mt-4">
-                                <Label htmlFor="author">Author</Label>
-                                <Input id="author" type="text" name="author" value={data.author} onChange={onChange} />
-                                <InputErrorMessage message={errors.author} />
-                            </div>
-                            <div className="mt-4">
                                 <Label htmlFor="link">Link</Label>
                                 <Input id="link" type="url" name="link" value={data.link} onChange={onChange} />
                                 <InputErrorMessage message={errors.link} />
+                            </div>
+                            <div className="mt-4">
+                                <Label htmlFor="experts">Experts</Label>
+                                <MultiSelect
+                                    id="experts"
+                                    name="experts"
+                                    options={experts.map(expert => ({ label: expert.name, value: expert.id }))} // Assuming experts have 'name' and 'id'
+                                    selectedvalues={data.experts} // Use selectedValues prop
+                                    onValueChange={handleExpertsChange} // Change this to match the expected prop
+                                    defaultValue={data.experts} // Set the default selected values
+
+                                />
+                                <InputErrorMessage message={errors.experts} />
                             </div>
                             <div className="mt-6">
                                 <Button type="submit" variant="primary" disabled={processing}>

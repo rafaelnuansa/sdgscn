@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('title');
             $table->string('year')->nullable();
-            $table->text('author');
+            $table->string('link')->nullable();
             $table->foreignUuid('sdg_id')->references('id')->on('sdgs')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });

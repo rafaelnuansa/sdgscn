@@ -1,1 +1,0 @@
-import{a as e,j as a}from"./app-6fa01f51.js";import{C as n}from"./container-482b5f5d.js";function d({title:r,subtitle:t}){return e("div",{className:"bg-background py-20",children:a(n,{children:[e("h2",{className:"mb-2 text-3xl font-bold tracking-tight text-foreground",children:r}),e("p",{className:"text-lg leading-8 text-muted-foreground",children:t})]})})}export{d as H};

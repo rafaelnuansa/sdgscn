@@ -31,6 +31,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         
         Route::resource('galleries', App\Http\Controllers\Admin\AlbumController::class)->names('galleries');
         Route::resource('research', App\Http\Controllers\Admin\ResearchController::class)->names('research');
+        Route::resource('publications', App\Http\Controllers\Admin\PublicationController::class)->names('publications');
 
         Route::get('settings', [App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
         Route::put('settings', [App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');

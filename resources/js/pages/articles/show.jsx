@@ -16,7 +16,6 @@ export default function ArticleShow() {
 
       <Header
         title={article.title}
-        subtitle={`Published on ${moment(article.created_at).format('DD MMMM YYYY')}`}
       />
 
       <Container>

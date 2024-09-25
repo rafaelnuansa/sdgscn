@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignUuid('sdg_id')->references('id')->on('sdgs')->cascadeOnUpdate();
             $table->string('title');
             $table->string('year')->nullable();
-            $table->text('author');
             $table->string('link')->nullable();
             $table->timestamps();
         });

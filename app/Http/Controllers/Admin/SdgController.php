@@ -11,13 +11,24 @@ use Illuminate\Support\Str;
 class SdgController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $sdgs = Sdg::latest()->paginate(10);
+        // Get the search query from the request
+        $search = $request->input('search');
+    
+        // Query the SDGs, filtering by the search term if it exists
+        $sdgs = Sdg::when($search, function ($query, $search) {
+                return $query->where('name', 'like', '%' . $search . '%'); // Adjust the field based on your model
+            })
+            ->latest()
+            ->paginate(10);
+    
         return inertia('admin/sdgs/index', [
-            'sdgs' => $sdgs
+            'sdgs' => $sdgs,
+            'search' => $search // Pass the search term to the view if needed
         ]);
     }
+    
 
     public function create()
     {

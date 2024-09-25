@@ -16,6 +16,12 @@ Route::get('articles/{slug}', [App\Http\Controllers\ArticleController::class, 's
 
 Route::get('sdgs', [App\Http\Controllers\SdgController::class, 'index'])->name('sdgs.index');
 Route::get('sdgs/{slug}', [App\Http\Controllers\SdgController::class, 'show'])->name('sdgs.show');
+Route::get('sdgs/{slug}/research', [App\Http\Controllers\SdgController::class, 'research'])->name('sdgs.research');
+
+Route::get('publications', [App\Http\Controllers\PublicationController::class, 'index'])->name('pulications.index');
+Route::get('research', [App\Http\Controllers\ResearchController::class, 'index'])->name('researches.index');
+
+Route::get('experts', [App\Http\Controllers\ExpertController::class, 'index'])->name('experts.index');
 
 Route::get('videos', [App\Http\Controllers\GalleryController::class, 'videos'])->name('galleries.videos.index');
 Route::get('videos/{slug}', [App\Http\Controllers\GalleryController::class, 'videoShow'])->name('galleries.videos.show');

@@ -8,15 +8,23 @@ use Illuminate\Http\Request;
 
 class ExpertController extends Controller
 {
-  
-    
-    public function index()
+
+    public function index(Request $request)
     {
-        $experts = Expert::latest()->get();
+        $search = $request->input('search', ''); // Get search term from request
+
+        $experts = Expert::when($search, function ($query) use ($search) {
+            $query->where('name', 'like', '%' . $search . '%'); // Filter by expert name
+        })->latest()->paginate(10);
+
         return inertia('admin/experts/index', [
-            'experts' => $experts
+            'experts' => $experts,
+            'filters' => [
+                'search' => $search,
+            ],
         ]);
     }
+
 
     public function create()
     {
@@ -32,17 +40,17 @@ class ExpertController extends Controller
                 'description' => 'string',
                 'link' => 'string',
             ]);
-    
+
             $image = $request->file('image');
             $image->storeAs('public/experts', $image->hashName());
-    
+
             // Create expert
             Expert::create([
                 'image' => $image->hashName(),
                 'name' => $request->name,
                 'description' => $request->description,
             ]);
-    
+
             flashMessage('Success', 'Expert created successfully.');
             return redirect()->route('admin.experts.index');
         } catch (QueryException $e) {
@@ -78,7 +86,7 @@ class ExpertController extends Controller
             $image = $request->file('image');
             $image->storeAs('public/experts', $image->hashName());
             //delete old image
-            Storage::delete('public/experts/'.$expert->image);
+            Storage::delete('public/experts/' . $expert->image);
             //update expert with new image
             $expert->update([
                 'image'         => $image->hashName(),
@@ -86,7 +94,6 @@ class ExpertController extends Controller
                 'description'         => $request->description,
                 'link'         => $request->link,
             ]);
-
         } else {
             //update expert without image
             $expert->update([
@@ -102,7 +109,7 @@ class ExpertController extends Controller
     public function destroy(Expert $expert)
     {
         $expert->delete();
-        Storage::delete('public/experts/'.$expert->image);
+        Storage::delete('public/experts/' . $expert->image);
         flashMessage('Success', 'Expert deleted successfully.');
         return redirect()->route('admin.experts.index');
     }

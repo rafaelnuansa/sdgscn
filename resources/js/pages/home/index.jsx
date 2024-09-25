@@ -15,6 +15,7 @@ export default function Home() {
     sliders,
     partners,
     web_setting,
+    ourSdgs
   } = usePage().props;
 
   return (
@@ -26,12 +27,12 @@ export default function Home() {
         url={route("home")}
       />
       <Hero slides={sliders} />
-  {/* New Section: Experts, Publications, Research, Papers */}
-  <div className="bg-white py-20">
+      {/* New Section: Experts, Publications, Research, Papers */}
+      <div className="bg-white py-20">
         <Container>
           <h2 className="text-3xl font-bold text-center mb-10">Explore Our Resources</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
             {/* Expert */}
             <div className="bg-gray-100 p-6 text-center rounded-lg">
               <AcademicCapIcon className="h-12 w-12 mx-auto mb-4 text-blue-500" />
@@ -63,49 +64,47 @@ export default function Home() {
             </div>
 
             {/* Paper */}
-            <div className="bg-gray-100 p-6 text-center rounded-lg">
+            {/* <div className="bg-gray-100 p-6 text-center rounded-lg">
               <DocumentTextIcon className="h-12 w-12 mx-auto mb-4 text-blue-500" />
               <h3 className="text-xl font-bold mb-2">Papers</h3>
               <p className="text-lg text-gray-600">
                 List of papers by SDGs researchers worldwide.
               </p>
               <Link href="/papers" className="text-blue-600 mt-4 inline-block">View Papers</Link>
-            </div>
+            </div> */}
 
           </div>
         </Container>
       </div>
-
-       {/* Section SDGs */}
-       <div className="bg-white py-20">
+      {/* Section SDGs */}
+      <div className="bg-white py-20">
         <Container>
           <h2 className="text-3xl font-bold text-center mb-10">Our SDGs</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* SDGs 1 */}
-            <div className="bg-gray-100 p-6 text-center rounded-lg">
-              <h3 className="text-xl font-bold mb-2">SDGs 1</h3>
-              <p className="text-md font-semibold text-gray-700">No Poverty</p>
-            </div>
-            {/* SDGs 4 */}
-            <div className="bg-gray-100 p-6 text-center rounded-lg">
-              <h3 className="text-xl font-bold mb-2">SDGs 4</h3>
-              <p className="text-md font-semibold text-gray-700">Quality Education</p>
-            </div>
-            {/* SDGs 5 */}
-            <div className="bg-gray-100 p-6 text-center rounded-lg">
-              <h3 className="text-xl font-bold mb-2">SDGs 5</h3>
-              <p className="text-md font-semibold text-gray-700">Gender Equality</p>
-            </div>
-            {/* SDGs 16 */}
-            <div className="bg-gray-100 p-6 text-center rounded-lg">
-              <h3 className="text-xl font-bold mb-2">SDGs 16</h3>
-              <p className="text-md font-semibold text-gray-700">Peace, Justice, and Strong Institutions</p>
-            </div>
-            {/* SDGs 17 */}
-            <div className="bg-gray-100 p-6 text-center rounded-lg">
-              <h3 className="text-xl font-bold mb-2">SDGs 17</h3>
-              <p className="text-md font-semibold text-gray-700">Partnerships for the Goals</p>
-            </div>
+            {ourSdgs.map((sdg) => (
+              <div
+                key={sdg.id}
+                className="relative rounded-lg overflow-hidden group"
+              >
+                <Link
+                  key={sdg.slug}
+                  href={route('sdgs.show', sdg.slug)} // or sdg.slug if using slugs
+                  className="relative rounded-lg overflow-hidden group block"
+                >
+                  {/* Image */}
+                  <img
+                    src={`/storage/sdgs/${sdg.image}`}
+                    alt={sdg.name}
+                    className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6">
+                    <h3 className="text-xl font-bold mb-2">{sdg.name}</h3>
+                    <p className="text-md font-semibold">{sdg.description}</p>
+                  </div>
+                </Link>
+              </div>
+            ))}
           </div>
         </Container>
       </div>
@@ -134,7 +133,7 @@ export default function Home() {
         </Container>
       </div>
 
-  {/* Section Become Our Partner */}
+      {/* Section Become Our Partner */}
       <div className="bg-gray-50 border-b py-20">
         <Container>
           <div className="text-center">

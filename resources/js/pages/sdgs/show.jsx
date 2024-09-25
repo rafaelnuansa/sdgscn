@@ -9,14 +9,13 @@ import moment from 'moment';
 
 export default function SdgShow() {
   const { sdg } = usePage().props;
-
+console.log(sdg);
   return (
     <>
-      <Head title={sdg.name} />
+      <Head title={sdg.name ?? 'Sdgs'} />
 
       <Header
         title={sdg.name}
-        subtitle={`Published on ${moment(sdg.created_at).format('DD MMMM YYYY')}`}
       />
 
       <Container>

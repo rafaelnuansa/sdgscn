@@ -14,7 +14,7 @@ export default function SdgIndex() {
             <Head title="Sdgs" />
 
 
-            <Header title={"Sdgs"} subtitle={'All packages'}></Header>
+            <Header title={"Sdgs"} subtitle={'Our Sdgs'}></Header>
             <Container>
 
                 <Breadcrumb

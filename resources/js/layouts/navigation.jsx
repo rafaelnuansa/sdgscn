@@ -219,16 +219,10 @@ export function Navigation() {
               className="inset-y-0 left-0 flex h-full min-h-screen w-[320px] max-w-80 flex-col overflow-y-auto overflow-x-hidden p-0 ring-1 ring-foreground/10  focus:outline-none"
             >
               <div className="sticky top-0 border-b bg-background p-5 shadow-sm ">
-                <Link
-                  className="flex h-16 mb-5 shrink-0 items-center"
-                  href={route("admin.dashboard.index")}
-                >
-                  <LogoDark />
-
-                </Link>
+           
                 <Button
                   size="icon"
-                  className="relative flex h-10 w-full items-center justify-between rounded-md border bg-background text-muted-foreground shadow-sm focus:outline-none"
+                  className="relative flex h-10 mt-10 w-full items-center justify-between rounded-md border bg-background text-muted-foreground shadow-sm focus:outline-none"
                   variant="ghost"
                   onClick={() => setOpenSearch(true)}
                 >

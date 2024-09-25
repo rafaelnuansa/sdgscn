@@ -38,10 +38,10 @@ export default function ExpertTable({ experts }) {
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {experts.map((expert) => (
+                {experts.data.map((expert) => (
                     <TableRow key={expert.id}>
                         <TableCell>
-                            <Image  src={`/storage/experts/${expert.image}`}  alt={expert.name} className="w-40 bg-gray-300 dark:bg-transparent p-5 rounded-lg object-cover" />
+                            <Image  src={`/storage/experts/${expert.image}`}  alt={expert.name} className="w-14 bg-gray-300 dark:bg-transparent p-5 rounded-lg object-cover" />
                         </TableCell>
                         <TableCell>{truncateString(expert.name, 40)}</TableCell>
                         <TableCell>{formatDate(expert.created_at)}</TableCell>

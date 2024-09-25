@@ -97,7 +97,7 @@ export default function Index({ auth, ...props }) {
                                         <div className="flex justify-end">
                                             <DropdownMenu>
                                                 <DropdownMenuTrigger>
-                                                    <Button variant="outline" size="icon">  <IconDotsVertical className="size-4" /></Button>
+                                                  <IconDotsVertical className="size-4" />
                                                 </DropdownMenuTrigger>
                                                 <DropdownMenuContent align="end" className="w-48">
                                                     <DropdownMenuLabel>Actions</DropdownMenuLabel>

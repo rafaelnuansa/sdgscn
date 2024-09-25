@@ -33,6 +33,7 @@ export default function SdgTable({ sdgs }) {
                 <TableRow>
                     <TableHead>Image</TableHead>
                     <TableHead>Name</TableHead>
+                    <TableHead>Desc</TableHead>
                     <TableHead>Created</TableHead>
                     <TableHead></TableHead>
                 </TableRow>
@@ -44,6 +45,7 @@ export default function SdgTable({ sdgs }) {
                             <Image  src={`/storage/sdgs/${sdg.image}`}  alt={sdg.name} className="w-40 bg-gray-300 dark:bg-transparent p-5 rounded-lg object-cover" />
                         </TableCell>
                         <TableCell>{truncateString(sdg.name, 40)}</TableCell>
+                        <TableCell>{truncateString(sdg.description, 40)}</TableCell>
                         <TableCell>{formatDate(sdg.created_at)}</TableCell>
                         <TableCell>
                             <div className="flex justify-end">

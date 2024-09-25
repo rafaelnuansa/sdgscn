@@ -47,7 +47,7 @@ export function formatDateTime(dateTime) {
 export function formatDate(date) {
     const options = {
         year: 'numeric',
-        month: 'long',
+        month: 'numeric',
         day: 'numeric',
     };
 

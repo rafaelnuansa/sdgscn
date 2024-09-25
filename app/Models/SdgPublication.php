@@ -12,13 +12,13 @@ class SdgPublication extends Model
 
     protected $guarded = ['id'];
 
-
-    /**
-     * Relasi many-to-one ke model Sdg.
-     * Banyak publikasi bisa dimiliki oleh satu SDG.
-     */
     public function sdg()
     {
         return $this->belongsTo(Sdg::class, 'sdg_id');
+    }
+    
+    public function experts()
+    {
+        return $this->belongsToMany(Expert::class, 'sdg_publication_experts', 'sdg_publication_id', 'expert_id');
     }
 }
